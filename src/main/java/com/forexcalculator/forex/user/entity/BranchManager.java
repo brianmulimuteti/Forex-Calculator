@@ -56,7 +56,7 @@ public class BranchManager {
 
     @Column(unique = true)
     @NotNull("ID Number cannot be null")
-    private Integer IdNumber;
+    private Integer idNumber;
 
     @Enumerated(EnumType.STRING)
     private Role Role;

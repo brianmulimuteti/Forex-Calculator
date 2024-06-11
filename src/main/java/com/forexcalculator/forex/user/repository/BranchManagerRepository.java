@@ -9,5 +9,7 @@ public interface BranchManagerRepository extends JpaRepository<BranchManager, Lo
 
     Optional<BranchManager> findByEmail(String email);
 
-    Optional<BranchManager> findByIdNumber(Integer idNumber);
+    BranchManager findByIdNumber(Integer idNumber);
+
+    BranchManager findByUsername(String username);
 }

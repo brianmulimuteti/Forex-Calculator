@@ -49,7 +49,7 @@ public class CustomerController {
         ResConstructor res = new ResConstructor();
 
         try {
-            Customer authenticatedCustomer = customerService.login(loginRequest.getIdNumber(),loginRequest.getPassword());
+            Customer authenticatedCustomer = customerService.login(loginRequest.getIdNumber(),loginRequest.getPassword(), loginRequest.getUsername());
 
             if (authenticatedCustomer!= null) {
                 String token = generateToken(authenticatedCustomer);

@@ -19,7 +19,7 @@ public class BranchManagerService {
 
 
     public BranchManager getByIdNumber(Integer idNumber) {
-        return branchManagerRepository.findByIdNumber(idNumber).orElseThrow();
+        return branchManagerRepository.findByIdNumber(idNumber);
     }
 
     public BranchManager getUserByEmail(String email) {
@@ -42,8 +42,8 @@ public class BranchManagerService {
         return branchManagerRepository.save(branchManager);
     }
 
-    public BranchManager login(Integer idNumber, String password) {
-        BranchManager branchManager = branchManagerRepository.findByIdNumber(idNumber).orElseThrow();
+    public BranchManager login(Integer idNumber, String password, String username) {
+        BranchManager branchManager = branchManagerRepository.findByIdNumber(idNumber);
         if (!passwordEncoder.matches(password, branchManager.getPassword())) {
             throw new RuntimeException("Invalid Password");
         }

@@ -1,6 +1,5 @@
 package com.forexcalculator.forex.user.service;
 
-import com.forexcalculator.forex.user.entity.BranchManager;
 import com.forexcalculator.forex.user.entity.Customer;
 import com.forexcalculator.forex.user.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class CustomerService {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
     }
-    public Customer login(Integer idNumber, String password) {
+    public Customer login(Integer idNumber, String password, String username) {
         Customer customer = customerRepository.findByIdNumber(idNumber).orElseThrow();
         if (!passwordEncoder.matches(password, customer.getPassword())) {
             throw new RuntimeException("Invalid Password");

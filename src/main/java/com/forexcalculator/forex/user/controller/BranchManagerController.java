@@ -49,7 +49,7 @@ public class BranchManagerController {
         ResConstructor res = new ResConstructor();
 
         try {
-            BranchManager authenticatedBranchManager = branchManagerService.login(loginRequest.getIdNumber(),loginRequest.getPassword());
+            BranchManager authenticatedBranchManager = branchManagerService.login(loginRequest.getIdNumber(),loginRequest.getPassword(), loginRequest.getUsername());
 
             if (authenticatedBranchManager!= null) {
 

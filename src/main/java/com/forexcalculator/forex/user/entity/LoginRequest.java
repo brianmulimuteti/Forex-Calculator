@@ -7,4 +7,5 @@ public class LoginRequest {
 
     private Integer idNumber;
     private String password;
+    private String username;
 }
