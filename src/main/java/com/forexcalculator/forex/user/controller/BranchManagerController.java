@@ -72,8 +72,8 @@ public class BranchManagerController {
     }
 
 
-    @GetMapping("/{idNumber}")
-    public ResponseEntity<?> getUserByUsername(@PathVariable Integer idNumber) {
+    @GetMapping("get-by-ID/{idNumber}")
+    public ResponseEntity<?> getUserIdNumber(@PathVariable Integer idNumber) {
         ResConstructor res = new ResConstructor();
 
         try {
