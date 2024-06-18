@@ -43,4 +43,7 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Role Role;
 
+    public Customer() {
+    }
+
 }
