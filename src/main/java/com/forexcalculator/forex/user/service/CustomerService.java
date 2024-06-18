@@ -22,7 +22,7 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
     public Customer login(Integer idNumber, String password, String username) {
-        Customer customer = customerRepository.findByIdNumber(idNumber).orElseThrow();
+        Customer customer = customerRepository.findByIdNumber(idNumber);
         if (!passwordEncoder.matches(password, customer.getPassword())) {
             throw new RuntimeException("Invalid Password");
         }
@@ -34,7 +34,7 @@ public class CustomerService {
         return customerRepository.findByEmail(email).orElseThrow();
     }
     public Customer getByIdNumber(Integer idNumber) {
-        return customerRepository.findByIdNumber(idNumber).orElseThrow();
+        return customerRepository.findByIdNumber(idNumber);
     }
 
     public List<Customer> getAllCustomers() {

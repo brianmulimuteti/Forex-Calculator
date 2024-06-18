@@ -1,22 +1,14 @@
 package com.forexcalculator.forex.user.entity;
 
+import com.forexcalculator.forex.auctionRoom.entity.AuctionRoom;
 import com.forexcalculator.forex.user.role.Role;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
+import java.util.Set;
+
 
 @Entity
 @Table(name = "Branch_Manager")
@@ -61,6 +53,9 @@ public class BranchManager {
 
     @Enumerated(EnumType.STRING)
     private Role Role;
+
+    @OneToMany(mappedBy = "corporateEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<AuctionRoom> auctionRoom;
     public BranchManager() {
     }
 
