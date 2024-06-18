@@ -6,10 +6,14 @@ import com.forexcalculator.forex.user.service.BranchManagerService;
 import com.forexcalculator.forex.util.entity.ResConstructor;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,6 +73,16 @@ public class BranchManagerController {
             res.setMessage(errorMessage);
             return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
         }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        logoutBranchManager(request, response, authentication);
+        return "redirect:/login";
+    }
+
+    public void logoutBranchManager(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+        logoutHandler.logout(request, response, authentication);
     }
 
 
