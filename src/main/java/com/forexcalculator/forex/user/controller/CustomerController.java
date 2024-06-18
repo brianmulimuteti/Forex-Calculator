@@ -72,9 +72,18 @@ public class CustomerController {
         }
     }
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        logoutCustomer(request, response, authentication);
-        return "redirect:/login";
+    public ResponseEntity<?> logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        ResConstructor res = new ResConstructor();
+
+        try {
+            logoutCustomer(request, response, authentication);
+            res.setMessage("Logout Successful");
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            logger.error("Error during logout e");
+            res.setMessage("An error occurred during logout");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
+        }
     }
 
     public void logoutCustomer(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
