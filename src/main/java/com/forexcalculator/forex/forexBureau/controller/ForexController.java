@@ -144,6 +144,4 @@ public class ForexController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
         }
     }
-
-
 }
