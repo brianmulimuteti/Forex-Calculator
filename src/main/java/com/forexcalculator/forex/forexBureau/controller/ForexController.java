@@ -141,6 +141,7 @@ public class ForexController {
         } catch (Exception e) {
             logger.error("Failed to update Forex Bureau", e);
             String errorMessage = "An error occurred while updating the forex bureau";
+            res.setMessage(errorMessage);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
         }
     }
