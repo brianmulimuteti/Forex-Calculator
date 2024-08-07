@@ -8,8 +8,27 @@ import io.swagger.v3.oas.annotations.info.License;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
-@OpenAPIDefinition(info = @Info(contact = @Contact(name = "Forex Calculator", email = "ForexCalculator.com", url = "https//ForexCalculator.com"), description = "API for Forex Calculator platform", title = "Forex Calculator API", version = "1.0.0", license = @License(name = "license name", url = "https://someurl.com")), servers = {
-        @Server(description = "Local ENV", url = "http://localhost:${server.port}") }, security = {
+@OpenAPIDefinition(
+        info = @Info(
+                contact = @Contact(
+                        name = "Forex Calculator",
+                        email = "ForexCalculator.com",
+                        url = "https//ForexCalculator.com"
+                ),
+                description = "API for Forex Calculator platform",
+                title = "Forex Calculator API",
+                version = "1.0.0",
+                license = @License(
+                        name = "license name",
+                        url = "https://someurl.com"
+                )
+        ), servers = {
+        @Server(
+                description = "Local ENV",
+                url = "http://localhost:${server.port}"
+        )
+},
+        security = {
         @SecurityRequirement(name = "bearerAuth") })
 @SecurityScheme(name = "bearerAuth", description = "JWT auth description", scheme = "bearer", type = SecuritySchemeType.HTTP, bearerFormat = "JWT", in = SecuritySchemeIn.HEADER)
 public class SwaggerDocsUI {

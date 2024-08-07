@@ -48,7 +48,7 @@ public class BranchManagerController {
         }
     }
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         ResConstructor res = new ResConstructor();
 
