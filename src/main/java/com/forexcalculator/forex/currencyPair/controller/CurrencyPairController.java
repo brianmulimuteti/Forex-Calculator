@@ -2,6 +2,7 @@ package com.forexcalculator.forex.currencyPair.controller;
 
 import com.forexcalculator.forex.config.AuthenticationFacade;
 import com.forexcalculator.forex.currencyPair.entity.CurrencyPair;
+import com.forexcalculator.forex.currencyPair.entity.CurrencyPairDto;
 import com.forexcalculator.forex.currencyPair.service.CurrencyPairService;
 import com.forexcalculator.forex.user.entity.BranchManager;
 import com.forexcalculator.forex.util.entity.ResConstructor;
@@ -118,7 +119,7 @@ public class CurrencyPairController {
     }
 
     @PostMapping("/save-currency-pair")
-    public ResponseEntity<?> saveCurrencyPair(@RequestBody CurrencyPair currencyPair) {
+    public ResponseEntity<?> saveCurrencyPair(@RequestBody CurrencyPairDto currencyPairDto) {
         ResConstructor res = new ResConstructor();
 
         if (!isBranchManager()) {
@@ -127,6 +128,9 @@ public class CurrencyPairController {
         }
 
         try {
+            CurrencyPair currencyPair = new CurrencyPair();
+            currencyPair.setQuoteCurrency(currencyPairDto.getQuoteCurrency());
+            currencyPair.setBaseCurrency(currencyPairDto.getBaseCurrency());
             CurrencyPair savedCurrencyPair = currencyPairService.saveCurrencyPair(currencyPair);
             res.setMessage("Currency Pair created successfully");
             res.setData(savedCurrencyPair);

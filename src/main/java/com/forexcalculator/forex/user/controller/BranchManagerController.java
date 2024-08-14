@@ -1,7 +1,9 @@
 package com.forexcalculator.forex.user.controller;
 
 import com.forexcalculator.forex.user.entity.BranchManager;
+import com.forexcalculator.forex.user.entity.BranchManagerSignUpDTO;
 import com.forexcalculator.forex.user.entity.LoginRequest;
+import com.forexcalculator.forex.user.role.Role;
 import com.forexcalculator.forex.user.service.BranchManagerService;
 import com.forexcalculator.forex.util.entity.ResConstructor;
 import io.jsonwebtoken.Jwts;
@@ -31,10 +33,21 @@ public class BranchManagerController {
     private BranchManagerService branchManagerService;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> signUp(@RequestBody BranchManager branchManager) {
+    public ResponseEntity<?> signUp(@RequestBody BranchManagerSignUpDTO branchManagerSignUpDTO) {
         ResConstructor res = new ResConstructor();
 
         try {
+            BranchManager branchManager = new BranchManager();
+            branchManager.setPassword(branchManagerSignUpDTO.getPassword());
+            branchManager.setUsername(branchManagerSignUpDTO.getUsername());
+            branchManager.setEmail(branchManagerSignUpDTO.getEmail());
+            branchManager.setPhoneNumber(branchManagerSignUpDTO.getPhoneNumber());
+            branchManager.setBureauName(branchManagerSignUpDTO.getBureauName());
+            branchManager.setKRAPin(branchManagerSignUpDTO.getKRAPin());
+            branchManager.setIdNumber(branchManagerSignUpDTO.getIdNumber());
+            branchManager.setPassword(branchManagerSignUpDTO.getPassword());
+            branchManager.setName(branchManagerSignUpDTO.getName());
+            branchManager.setRole(Role.BRANCH_MANAGER);
             BranchManager createdBranchManager = branchManagerService.signUp(branchManager);
 
             res.setMessage("BranchManager added successfully");

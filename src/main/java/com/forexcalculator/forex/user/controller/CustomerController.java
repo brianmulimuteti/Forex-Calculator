@@ -1,7 +1,9 @@
 package com.forexcalculator.forex.user.controller;
 
 import com.forexcalculator.forex.user.entity.Customer;
+import com.forexcalculator.forex.user.entity.CustomerSignUpDTO;
 import com.forexcalculator.forex.user.entity.LoginRequest;
+import com.forexcalculator.forex.user.role.Role;
 import com.forexcalculator.forex.user.service.CustomerService;
 import com.forexcalculator.forex.util.entity.ResConstructor;
 import io.jsonwebtoken.Jwts;
@@ -31,10 +33,19 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> signUp(@RequestBody Customer customer) {
+    public ResponseEntity<?> signUp(@RequestBody CustomerSignUpDTO customerSignUpDTO) {
         ResConstructor res = new ResConstructor();
 
         try {
+            Customer customer = new Customer();
+            customer.setName(customerSignUpDTO.getName());
+            customer.setUsername(customerSignUpDTO.getUsername());
+            customer.setPassword(customerSignUpDTO.getPassword());
+            customer.setEmail(customerSignUpDTO.getEmail());
+            customer.setPhoneNumber(customerSignUpDTO.getPhoneNumber());
+            customer.setIdNumber(customerSignUpDTO.getIdNumber());
+            customer.setRole(Role.CUSTOMER);
+
             Customer createdCustomer = customerService.signUp(customer);
 
             res.setMessage("Customer added successfully");
@@ -47,6 +58,7 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(res);
         }
     }
+
     @PostMapping("login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         ResConstructor res = new ResConstructor();
